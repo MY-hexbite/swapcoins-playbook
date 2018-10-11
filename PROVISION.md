@@ -1,0 +1,6 @@
+- ssh-copy-id -i ssh/id_rsa.pub root@<ip address>
+- vi environment/<environment>/group_vars/all/all
+- change 'ansible_ssh_port' from 2345 to 22
+- ansible-playbook provisioning/provision.yml -i "<ip address>:22," -u root --extra-vars "environment_name=staging"
+- vi environment/<environment>/group_vars/all/all
+- change back 'ansible_ssh_port' from 22 to 2345

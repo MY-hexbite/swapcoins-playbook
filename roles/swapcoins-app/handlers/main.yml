@@ -1,0 +1,8 @@
+---
+
+- name: stop swapcoins app
+  command: 'pm2 delete {{ item }}'
+  ignore_errors: True
+  with_items:
+    - api
+    - web

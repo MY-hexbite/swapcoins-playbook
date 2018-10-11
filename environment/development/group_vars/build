@@ -1,0 +1,5 @@
+---
+
+# build - git config
+swapcoins_app_build_git_remote: origin
+swapcoins_app_build_git_branch: default

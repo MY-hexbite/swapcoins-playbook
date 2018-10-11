@@ -1,0 +1,6 @@
+---
+
+  - name: add swapcoins user
+    user: 
+      name: swapcoins
+      system: yes

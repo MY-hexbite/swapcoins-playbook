@@ -1,0 +1,7 @@
+---
+
+- hosts: swapcoins
+  become: yes
+  roles:
+    - common
+    - { role: swapcoins-app, tags: swapcoins-app }

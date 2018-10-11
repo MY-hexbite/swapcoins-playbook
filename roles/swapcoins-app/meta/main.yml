@@ -1,0 +1,9 @@
+---
+
+dependencies:
+  - swapcoins-user
+  - nginx
+  - postgres
+  - nodejs
+  - node-env
+  - letsencrypt

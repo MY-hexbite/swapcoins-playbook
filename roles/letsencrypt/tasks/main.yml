@@ -1,0 +1,81 @@
+---
+
+# https://blog.evantahler.com/ansible-letsencrypt-nginx-and-actionhero-7be135fc6319
+- name: install certbot dependencies
+  apt:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - build-essential
+    - libssl-dev
+    - libffi-dev
+    - python-dev
+    - git
+    - python-pip
+    - python-virtualenv
+    - dialog
+    - libaugeas0
+    - ca-certificates
+
+- name: install Python cryptography module
+  pip:
+    name: cryptography
+
+- name: download certbot
+  become: yes
+  become_user: '{{ swapcoins_deploy_user }}'
+  get_url: >
+    url=https://dl.eff.org/certbot-auto
+    dest=/home/{{ swapcoins_deploy_user }}/certbot-auto
+
+- name: change certbot ownership
+  become: yes
+  file:
+    path: '/home/{{ swapcoins_deploy_user }}/certbot-auto'
+    group: '{{ swapcoins_deploy_user }}'
+    owner: '{{ swapcoins_deploy_user }}'
+    mode: 0755
+
+- name: check if certs are generated
+  stat: path=/etc/letsencrypt/live/swapcoins.com/fullchain.pem
+  register: cert_stats
+
+- name: disable nginx and start standalone server if certs do not exist
+  service: name=nginx state=stopped
+  when: cert_stats.stat.exists == False
+
+- name: generate certs (first time)
+  become: yes
+  # become_user: '{{ swapcoins_deploy_user }}'
+  shell: "/home/{{ swapcoins_deploy_user }}/certbot-auto certonly --standalone {{ letsencrypt_domain_flags | join(' ') }} --email {{ letsencrypt_email }} --non-interactive --agree-tos"
+  when: cert_stats.stat.exists == False
+
+- name: create folder for certs
+  file:
+    path: '/home/{{ swapcoins_deploy_user }}/www/swapcoins.com/current/public'
+    state: directory
+    group: '{{ swapcoins_deploy_user }}'
+    owner: '{{ swapcoins_deploy_user }}'
+  when: cert_stats.stat.exists == True
+
+- name: generate certs (subsequent time)
+  become: yes
+  # become_user: '{{ swapcoins_deploy_user }}'
+  shell: "/home/{{ swapcoins_deploy_user }}/certbot-auto certonly --webroot -w /home/{{ swapcoins_deploy_user }}/www/swapcoins.com/current/public {{ letsencrypt_domain_flags | join(' ') }} --email {{ letsencrypt_email}} --non-interactive --agree-tos"
+  when: cert_stats.stat.exists == True
+
+- name: add cron job to autorenew certificates every week
+  become: yes
+  cron:
+    name: 'renew certificates'
+    minute: '0'
+    hour: '0'
+    day: '*'
+    month: '*'
+    weekday: '0'
+    job: "/home/{{ swapcoins_deploy_user}}/certbot-auto renew --quiet --renew-hook 'service nginx reload'"
+
+- name: hup nginx
+  service:
+    name: nginx
+    state: reloaded

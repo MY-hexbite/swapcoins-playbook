@@ -1,0 +1,44 @@
+---
+
+- name: swapcoins app deploy - stop swapcoins app
+  become_user: '{{ swapcoins_app_user }}'
+  command: 'pm2 delete {{ item }}'
+  ignore_errors: True
+  with_items:
+    - api
+    - web
+
+- name: swapcoins app deploy - deploy swapcoins app
+  command: rsync
+    --delay-updates -FF --compress --delete-after --archive
+    ~{{ ansible_ssh_user }}/build/swapcoins-app/
+    {{ swapcoins_app_install_dir }}/
+  tags:
+    - swapcoins-app
+    - swapcoins-app-deploy
+
+- name: swapcoins app deploy - change ownership of swapcoins app
+  file:
+    path: '{{ swapcoins_app_install_dir }}'
+    owner: '{{ swapcoins_app_user }}'
+    group: '{{ swapcoins_app_user }}'
+    state: directory
+    recurse: yes
+  tags:
+    - swapcoins-deploy
+    - swapcoins-app-deploy
+
+- name: swapcoins app deploy - start swapcoins apps
+  become_user: '{{ swapcoins_app_user }}'
+  shell: npm run start
+  args:
+    chdir: '{{ swapcoins_app_install_dir }}/{{ item }}'
+  with_items:
+    - api
+    - web
+
+# - name: swapcoins app deploy - start swapcoins web app
+#   shell: npm run start
+#   args:
+#     chdir: '{{ swapcoins_app_install_dir }}/web'
+#   become_user: '{{ swapcoins_app_user }}'

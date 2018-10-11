@@ -1,0 +1,29 @@
+---
+
+- name: add postgres repository to sources
+  become: yes
+  apt_repository:
+    repo: deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main
+
+- name: add key for postgres repository
+  become: yes
+  apt_key:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    state: present
+
+- name: install postgres
+  become: yes
+  apt:
+    name: '{{ item }}'
+    state: latest
+    update_cache: yes
+  with_items:
+    - postgresql-9.6
+    - postgresql-contrib-9.6
+    - python-psycopg2
+
+- name: start postgres
+  become: yes
+  service:
+    name: postgresql
+    state: started

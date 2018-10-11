@@ -1,0 +1,40 @@
+---
+- hosts: all
+  become: true
+
+  tasks:
+    - name: install python 2
+      raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+
+    - include_vars: ../environment/development/group_vars/all
+      when: environment_name is not defined
+
+    - include_vars: ../environment/development/group_vars/all
+      when: environment_name == "development"
+
+    - include_vars: ../environment/staging/group_vars/all/all
+      when: environment_name == "staging"
+
+    - include_vars: ../environment/staging/group_vars/all/vault
+      when: environment_name == "staging"
+
+    - include_vars: ../environment/production/group_vars/all/all
+      when: environment_name == "production"
+
+    - include_vars: ../environment/production/group_vars/all/vault
+      when: environment_name == "production"
+    
+    - include_vars: ../environment/production_init/group_vars/all/vault
+      when: environment_name == "production_init"
+
+    - include_vars: ../environment/production_init/group_vars/all/all
+      when: environment_name == "production_init"
+
+    - include: ../roles/common/tasks/users.yml
+      vars:        
+        ssh_public_key: "{{ lookup('file', '../ssh/id_rsa.pub') }}"
+
+    - include: ../roles/common/tasks/ssh.yml
+
+  handlers:
+    - include: ../roles/common/handlers/main.yml

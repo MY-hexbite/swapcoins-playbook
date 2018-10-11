@@ -1,0 +1,30 @@
+---
+
+- name: install apt transport https
+  become: yes
+  apt:
+    name: '{{ item }}'
+    state: latest
+    update_cache: yes
+  with_items:
+    - apt-transport-https
+
+- name: install gpg key for nodejs LTS
+  become: yes
+  apt_key:
+    url: 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key'
+    state: present
+
+- name: install nodejs LTS repos
+  become: yes
+  apt_repository:
+    repo: 'deb https://deb.nodesource.com/node_{{ nodejs_version }}.x {{ ansible_distribution_release }} main'
+    state: present
+    update_cache: yes
+
+- name: install nodejs
+  become: yes
+  apt:
+    name: nodejs
+    state: present
+

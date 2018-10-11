@@ -1,0 +1,23 @@
+---
+
+swapcoins_app_user: swapcoins
+swapcoins_app_web_host: swapcoins.com
+swapcoins_app_api_host: api.swapcoins.com
+
+# swapcoins app - install
+swapcoins_app_install_dir: /srv/swapcoins-app
+
+# database
+swapcoins_app_api_postgres_database: swapcoins
+swapcoins_app_api_postgres_user: postgres
+swapcoins_app_api_postgres_password: '{{ vault_swapcoins_app_api_postgres_password }}'
+
+# environment
+#swapcoins_app_api_port: 3001
+swapcoins_app_web_port: 3000
+#swapcoins_app_api_root_url: https://api.swapcoins.com
+swapcoins_app_web_root_url: https://swapcoins.com
+
+# nginx
+#swapcoins_app_api_nginx_server_name: api.swapcoins.com
+swapcoins_app_web_nginx_server_name: swapcoins.com

@@ -1,0 +1,36 @@
+---
+# advanced package tool
+- name: install apt transport https
+  become: yes
+  apt:
+    name: '{{ item }}'
+    state: latest
+    update_cache: yes
+  with_items:
+    - apt-transport-https
+
+- name: install apt system packages
+  become: yes
+  apt:
+    name: '{{ item }}'
+    state: latest
+    update_cache: yes
+  with_items:
+    - python-simplejson
+    - aptitude
+    - fail2ban
+    - unattended-upgrades
+    - curl
+    - unzip
+    - ntp
+    - acl
+
+- name: install apt development tools packages
+  become: yes
+  apt:
+    name: '{{ item }}'
+    state: latest
+    update_cache: yes
+  with_items:
+    - software-properties-common
+    - python-software-properties

@@ -1,0 +1,10 @@
+---
+
+- name: install npm tools
+  npm:
+    name: '{{ item }}'
+    global: yes
+    state: latest
+  with_items:
+    - pm2
+    - knex

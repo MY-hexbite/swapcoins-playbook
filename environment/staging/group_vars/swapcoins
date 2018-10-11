@@ -1,0 +1,11 @@
+---
+
+# swapcoins app - node
+swapcoins_app_node_env: staging
+
+# swapcoins app - database
+swapcoins_app_api_postgres_database: swapcoins
+swapcoins_app_api_postgres_user: postgres
+swapcoins_app_api_postgres_password: "{{ vault_swapcoins_app_api_postgres_password }}"
+swapcoins_app_api_postgres_port: 5432
+swapcoins_app_api_postgres_host: localhost

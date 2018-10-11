@@ -1,0 +1,117 @@
+---
+
+- name: create swapcoins app install dir
+  file:
+    path: '{{ item }}'
+    state: directory
+    owner: '{{ swapcoins_app_user }}'
+    group: '{{ swapcoins_app_user }}'
+  with_items:
+    - "{{ swapcoins_app_install_dir }}"
+
+- name: create swapcoins app build upload dir
+  file:
+    path: '{{ item }}'
+    state: directory
+    owner: '{{ ansible_ssh_user }}'
+    group: '{{ ansible_ssh_user }}'
+  with_items:
+    - ~{{ ansible_ssh_user }}/build/
+    - ~{{ ansible_ssh_user }}/build/swapcoins-app
+
+# upload swapcoins app build to remote
+- name: copy swapcoins app build git hash
+  copy:
+    src: '{{ swapcoins_app_local_build_dir }}/git-hash'
+    dest: '~{{ ansible_ssh_user }}/build/swapcoins-app/git-hash'
+    owner: '{{ ansible_ssh_user }}'
+    group: '{{ ansible_ssh_user }}'
+  register: swapcoins_app_git_hash
+  tags:
+    - swapcoins-app
+    - swapcoins-app-deploy
+
+- include: upload.yml
+  tags:
+    - swapcoins-deploy
+    - swapcoins-app-deploy
+
+# database
+- include: database.yml
+
+# npm
+- include: npm.yml
+
+# config
+- name: copy api config file
+  template:
+    src: api_config_config.js
+    dest: '~{{ ansible_ssh_user }}/build/swapcoins-app/api/config/config.js'
+    owner: '{{ swapcoins_app_user }}'
+    group: '{{ hswapcoins_app_user }}'
+  tags:
+    - swapcoins-deploy
+    - swapcoins-app-deploy
+
+- name: copy api connections file
+  template:
+    src: api_config_connections.js
+    dest: '~{{ ansible_ssh_user }}/build/swapcoins-app/api/config/connections.js'
+    owner: '{{ swapcoins_app_user }}'
+    group: '{{ swapcoins_app_user }}'
+  tags:
+    - swapcoins-deploy
+    - swapcoins-app-deploy
+
+- name: copy web config file
+  template:
+    src: web_config_config.js
+    dest: '~{{ ansible_ssh_user }}/build/swapcoins-app/web/config/config.js'
+    owner: '{{ swapcoins_app_user }}'
+    group: '{{ swapcoins_app_user }}'
+  tags:
+    - swapcoins-deploy
+    - swapcoins-app-deploy
+
+# deploy
+- include: deploy.yml
+  when: uploaded_swapcoins_app.changed or force_deploy is defined
+  tags:
+    - swapcoins-deploy
+
+# migrations
+- name: run knex migration
+  command: knex migrate:latest --cwd db
+  args:
+    chdir: '{{ swapcoins_app_install_dir }}/api'
+  tags:
+    - swapcoins-deploy
+    - swapcoins-app-deploy
+
+# nginx
+- name: copy nginx configuration file
+  template:
+    src: etc_nginx_sites-available_swapcoins.ca
+    dest: '/etc/nginx/sites-available/{{ swapcoins_app_web_host }}'
+  notify: reload nginx
+
+- name: enable in nginx
+  file:
+    src: '/etc/nginx/sites-available/{{ swapcoins_app_web_host }}'
+    dest: '/etc/nginx/sites-enabled/{{ swapcoins_app_web_host }}'
+    state: link
+  notify: reload nginx
+
+- name: copy api nginx configuration file
+  template:
+    src: etc_nginx_sites-available_api.swapcoins.ca
+    dest: '/etc/nginx/sites-available/{{ swapcoins_app_api_host }}'
+  notify: reload nginx
+
+- name: enable in nginx
+  file:
+    src: '/etc/nginx/sites-available/{{ swapcoins_app_api_host }}'
+    dest: '/etc/nginx/sites-enabled/{{ swapcoins_app_api_host }}'
+    state: link
+  notify: reload nginx
+

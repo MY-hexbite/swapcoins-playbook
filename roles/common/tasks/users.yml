@@ -1,0 +1,36 @@
+---
+
+- name: setup root user
+  become: yes
+  user:
+    name: root
+    update_password: always
+    password: '{{ root_user_crypted_password }}'
+
+- name: setup root user ssh keys
+  become: yes
+  authorized_key:
+    user: root
+    key: '{{ ssh_public_key }}'
+
+- name: setup deploy user
+  become: yes
+  user:
+    name: deploy
+    update_password: always
+    password: '{{ deploy_user_crypted_password }}'
+    shell: /bin/bash
+
+- name: setup deploy user ssh keys
+  become: yes
+  authorized_key:
+    user: deploy
+    key: '{{ ssh_public_key }}'
+
+- name: grant deploy user root privileges
+  become: yes
+  lininfile:
+    dest: /etc/sudoers
+    regexp: '^deploy'
+    line: 'deploy ALL={ALL:ALL) ALL'
+    state: present

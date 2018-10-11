@@ -1,0 +1,42 @@
+---
+
+- name: set rsync upload user to ansible ssh user
+  set_fact: swapcoins_app_rsync_user={{ ansible_ssh_user }}
+  when: swapcoins_app_git_hash is changed or force_upload is defined
+  tags:
+    - swapcoins-app
+    - swapcoins-app-deploy
+
+- name: upload swapcoins app via rsync
+  local_action: command rsync
+    --delay-updates -FF --compress --delete-after --archive --out-format='<<CHANGED>>%i %n%L'
+    --exclude node_modules/
+    --rsh 'ssh -i ssh/id_rsa -S none -o StrictHostKeyChecking=no -o Port={{ ansible_ssh_port }}' --rsync-path=\"rsync\"
+    {{ swapcoins_app_local_build_dir }}/
+    {{ swapcoins_app_rsync_user }}@{{ inventory_hostname }}:~{{ swapcoins_app_rsync_user }}/build/swapcoins-app/
+  become: false
+  when: swapcoins_app_git_hash is changed or force_upload is defined
+  register: uploaded_swapcoins_app
+  tags:
+    - swapcoins-app
+    - swapcoins-app-deploy
+
+- name: install npm package.json for api
+  npm:
+    executable: /usr/bin/npm --unsafe-perm=true --allow-root
+    path: '/home/{{ swapcoins_app_rsync_user }}/build/swapcoins-app/api'
+    production: yes
+  when: swapcoins_app_git_hash is changed or force_upload is defined
+  tags:
+    - swapcoins-app
+    - swapcoins-app-deploy
+
+- name: install npm package.json for web
+  npm:
+    executable: /usr/bin/npm --unsafe-perm=true --allow-root
+    path: '/home/{{ swapcoins_app_rsync_user }}/build/swapcoins-app/web'
+    production: yes
+  when: swapcoins_app_git_hash is changed or force_upload is defined
+  tags:
+    - swapcoins-app
+    - swapcoins-app-deploy

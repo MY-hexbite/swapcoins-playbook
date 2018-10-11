@@ -1,0 +1,8 @@
+---
+
+- name: configure node_env to production in environment variable
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^NODE_ENV='
+    line: 'NODE_ENV={{ swapcoins_app_node_env }}'
+  when: swapcoins_app_node_env is defined

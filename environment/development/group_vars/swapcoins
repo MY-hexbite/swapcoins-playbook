@@ -1,0 +1,11 @@
+---
+
+# swapcoins app - node
+swapcoins_app_node_env: development
+
+# swapcoins app - database
+swapcoins_app_api_postgres_database: swapcoins_development
+swapcoins_app_api_postgres_user: postgres
+swapcoins_app_api_postgres_password: password
+swapcoins_app_api_postgres_port: 5432
+swapcoins_app_api_postgres_host: localhost

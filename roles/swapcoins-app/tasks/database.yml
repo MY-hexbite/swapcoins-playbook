@@ -1,0 +1,35 @@
+---
+
+- name: create postgres user
+  become: yes
+  become_user: postgres
+  postgresql_user:
+    name: '{{ swapcoins_app_api_postgres_user }}'
+    password: '{{ swapcoins_app_api_postgres_password }}'
+    state: present
+  vars:
+    ansible_ssh_pipelining: true
+
+- name: create postgres database
+  become: yes
+  become_user: postgres
+  postgresql_db:
+    name: '{{ swapcoins_app_api_postgres_database }}'
+    owner: '{{ swapcoins_app_api_postgres_user }}'
+
+- name: grant all privileges on postgres database to postgres user
+  become: yes
+  become_user: postgres
+  postgresql_privs:
+    privs: ALL
+    db: '{{ swapcoins_app_api_postgres_database }}'
+    type: database
+    role: '{{ swapcoins_app_api_postgres_user }}'
+
+- name: grant superuser to postgres user
+  become: yes
+  become_user: postgres
+  postgresql_user:
+    name: '{{ swapcoins_app_api_postgres_user }}'
+    role_attr_flags: SUPERUSER
+  notify: restart postgres

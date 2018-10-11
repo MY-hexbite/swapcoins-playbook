@@ -1,0 +1,22 @@
+---
+# uncomplicated firewall
+- name: install ufw
+  apt:
+    pkg: '{{ item }}'
+    state: present
+  with_items:
+    - ufw
+
+- name: ufw allow
+  ufw:
+    rule: allow
+    port: '{{ item }}'
+    proto: tcp
+  with_items:
+    - '{{ ssh_port }}'
+    - '80'
+    - '443'
+
+- name: ufw enable
+  ufw:
+    state: enabled
