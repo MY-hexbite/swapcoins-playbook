@@ -1,0 +1,283 @@
+---
+
+- name: configure process.env environment variables
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^EMAIL_ADDRESS_VERIFY='
+    line: 'EMAIL_ADDRESS_VERIFY={{ swapcoins_email_address_verify }}'
+  when: swapcoins_email_address_verify is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^EMAIL_ADDRESS_VERIFY_PW='
+    line: 'EMAIL_ADDRESS_VERIFY_PW={{ swapcoins_email_address_verify_pw }}'
+  when: swapcoins_email_address_verify_pw is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^EMAIL_ADDRESS_ORDER='
+    line: 'EMAIL_ADDRESS_ORDER={{ swapcoins_email_address_order }}'
+  when: swapcoins_email_address_order is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^EMAIL_ADDRESS_ORDER_PW='
+    line: 'EMAIL_ADDRESS_ORDER_PW={{ swapcoins_email_address_order_pw }}'
+  when: swapcoins_email_address_order_pw is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^EMAIL_ADDRESS_SUPPORT='
+    line: 'EMAIL_ADDRESS_SUPPORT={{ swapcoins_email_address_support }}'
+  when: swapcoins_email_address_support is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^EMAIL_ADDRESS_SUPPORT_PW='
+    line: 'EMAIL_ADDRESS_SUPPORT_PW={{ swapcoins_email_address_support_pw }}'
+  when: swapcoins_email_address_support_pw is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_BITSO='
+    line: 'API_KEY_BITSO={{ swapcoins_api_key_bitso }}'
+  when: swapcoins_api_key_bitso is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_BITSO='
+    line: 'API_SECRET_BITSO={{ swapcoins_api_secret_bitso }}'
+  when: swapcoins_api_secret_bitso is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_BITTREX='
+    line: 'API_KEY_BITTREX={{ swapcoins_api_key_bittrex }}'
+  when: swapcoins_api_key_bittrex is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_BITTREX='
+    line: 'API_SECRET_BITTREX={{ swapcoins_api_secret_bittrex }}'
+  when: swapcoins_api_secret_bittrex is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_CEX='
+    line: 'API_KEY_CEX={{ swapcoins_api_key_cex }}'
+  when: swapcoins_api_key_cex is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_CEX='
+    line: 'API_SECRET_CEX={{ swapcoins_api_secret_cex }}'
+  when: swapcoins_api_secret_cex is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_USER_ID_CEX='
+    line: 'API_USER_ID_CEX={{ swapcoins_api_user_id_cex }}'
+  when: swapcoins_api_user_id_cex is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_CHANGELLY='
+    line: 'API_KEY_CHANGELLY={{ swapcoins_api_key_changelly }}'
+  when: swapcoins_api_key_changelly is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_CHANGELLY='
+    line: 'API_SECRET_CHANGELLY={{ swapcoins_api_secret_changelly }}'
+  when: swapcoins_api_secret_changelly is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_CHANGENOW='
+    line: 'API_KEY_CHANGENOW={{ swapcoins_api_key_changenow }}'
+  when: swapcoins_api_key_changenow is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_CHANGENOW='
+    line: 'API_SECRET_CHANGENOW={{ swapcoins_api_secret_changenow }}'
+  when: xx is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_CHANGER='
+    line: 'API_KEY_CHANGER={{ swapcoins_api_key_changer }}'
+  when: swapcoins_api_key_changer is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_CHANGER='
+    line: 'API_SECRET_CHANGER={{ swapcoins_api_secret_changer }}'
+  when: swapcoins_api_secret_changer is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_REF_ID_CHANGER='
+    line: 'API_REF_ID_CHANGER={{ swapcoins_api_ref_id_changer }}'
+  when: swapcoins_api_ref_id_changer is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_CRYPTOPIA='
+    line: 'API_KEY_CRYPTOPIA={{ swapcoins_api_key_cryptopia }}'
+  when: swapcoins_api_key_cryptopia is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_CRYPTOPIA='
+    line: 'API_SECRET_CRYPTOPIA={{ swapcoins_api_secret_cryptopia }}'
+  when: swapcoins_api_secret_cryptopia is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_EXMO='
+    line: 'API_KEY_EXMO={{ swapcoins_api_key_exmo }}'
+  when: swapcoins_api_key_exmo is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_EXMO='
+    line: 'API_SECRET_EXMO={{ swapcoins_api_secret_exmo }}'
+  when: swapcoins_api_secret_exmo is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_GATECOIN='
+    line: 'API_KEY_GATECOIN={{ swapcoins_api_key_gatecoin }}'
+  when: swapcoins_api_key_gatecoin is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_GATECOIN='
+    line: 'API_SECRET_GATECOIN={{ swapcoins_api_secret_gatecoin }}'
+  when: swapcoins_api_secret_gatecoin is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_GATEIO='
+    line: 'API_KEY_GATEIO={{ swapcoins_api_key_gateio }}'
+  when: swapcoins_api_key_gateio is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_GATEIO='
+    line: 'API_SECRET_GATEIO={{ swapcoins_api_secret_gateio }}'
+  when: swapcoins_api_secret_gateio is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_ITBIT='
+    line: 'API_KEY_ITBIT={{ swapcoins_api_key_itbit }}'
+  when: swapcoins_api_key_itbit is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_ITBIT='
+    line: 'API_SECRET_ITBIT={{ swapcoins_api_secret_itbit }}'
+  when: swapcoins_api_secret_itbit is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_KUCOIN='
+    line: 'API_KEY_KUCOIN={{ swapcoins_api_key_kucoin }}'
+  when: swapcoins_api_key_kucoin is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_KUCOIN='
+    line: 'API_SECRET_KUCOIN={{ swapcoins_api_secret_kucoin }}'
+  when: swapcoins_api_secret_kucoin is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_LAKEBTC='
+    line: 'API_KEY_LAKEBTC={{ swapcoins_api_key_lakebtc }}'
+  when: swapcoins_api_key_lakebtc is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_LAKEBTC='
+    line: 'API_SECRET_LAKEBTC={{ swapcoins_api_secret_lakebtc }}'
+  when: swapcoins_api_secret_lakebtc is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_LIQUI='
+    line: 'API_KEY_LIQUI={{ swapcoins_api_key_liqui }}'
+  when: swapcoins_api_key_liqui is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_LIQUI='
+    line: 'API_SECRET_LIQUI={{ swapcoins_api_secret_liqui }}'
+  when: swapcoins_api_secret_liqui is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_LIVECOIN='
+    line: 'API_KEY_LIVECOIN={{ swapcoins_api_key_livecoin }}'
+  when: swapcoins_api_key_livecoin is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_LIVECOIN='
+    line: 'API_SECRET_LIVECOIN={{ swapcoins_api_secret_livecoin }}'
+  when: swapcoins_api_secret_livecoin is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_NEXCHANGE='
+    line: 'API_KEY_NEXCHANGE={{ swapcoins_api_key_nexchange }}'
+  when: swapcoins_api_key_nexchange is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_NEXCHANGE='
+    line: 'API_SECRET_NEXCHANGE={{ swapcoins_api_secret_nexchange }}'
+  when: swapcoins_api_secret_nexchange is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_OKEX='
+    line: 'API_KEY_OKEX={{ swapcoins_api_key_okex }}'
+  when: swapcoins_api_key_okex is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_OKEX='
+    line: 'API_SECRET_OKEX={{ swapcoins_api_secret_okex }}'
+  when: swapcoins_api_secret_okex is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_QUADRIGA='
+    line: 'API_KEY_QUADRIGA={{ swapcoins_api_key_quadriga }}'
+  when: swapcoins_api_key_quadriga is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_QUADRIGA='
+    line: 'API_SECRET_QUADRIGA={{ swapcoins_api_secret_quadriga }}'
+  when: swapcoins_api_secret_quadriga is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_SHAPESHIFT='
+    line: 'API_KEY_SHAPESHIFT={{ swapcoins_api_key_shapeshift }}'
+  when: swapcoins_api_key_shapeshift is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_SHAPESHIFT='
+    line: 'API_SECRET_SHAPESHIFT={{ swapcoins_api_secret_shapeshift }}'
+  when: swapcoins_api_secret_shapeshift is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_THEROCKTRADING='
+    line: 'API_KEY_THEROCKTRADING={{ swapcoins_api_key_therocktrading }}'
+  when: swapcoins_api_key_therocktrading is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_THEROCKTRADING='
+    line: 'API_SECRET_THEROCKTRADING={{ swapcoins_api_secret_therocktrading }}'
+  when: swapcoins_api_secret_therocktrading is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_TIDEX='
+    line: 'API_KEY_TIDEX={{ swapcoins_api_key_tidex }}'
+  when: swapcoins_api_key_tidex is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_TIDEX='
+    line: 'API_SECRET_TIDEX={{ swapcoins_api_secret_tidex }}'
+  when: swapcoins_api_secret_tidex is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_TRADESATOSHI='
+    line: 'API_KEY_TRADESATOSHI={{ swapcoins_api_key_tradesatoshi }}'
+  when: swapcoins_api_key_tradesatoshi is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_TRADESATOSHI='
+    line: 'API_SECRET_TRADESATOSHI={{ swapcoins_api_secret_tradesatoshi }}'
+  when: swapcoins_api_secret_tradesatoshi is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_KEY_COINPAYMENTS='
+    line: 'API_KEY_COINPAYMENTS={{ swapcoins_api_key_coinpayments }}'
+  when: swapcoins_api_key_coinpayments is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_SECRET_COINPAYMENTS='
+    line: 'API_SECRET_COINPAYMENTS={{ swapcoins_api_secret_coinpayments }}'
+  when: swapcoins_api_secret_coinpayments is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_IPN_SECRET_COINPAYMENTS='
+    line: 'API_IPN_SECRET_COINPAYMENTS={{ swapcoins_api_ipn_secret_coinpayments }}'
+  when: swapcoins_api_ipn_secret_coinpayments is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^API_MERCHANT_ID_COINPAYMENTS='
+    line: 'API_MERCHANT_ID_COINPAYMENTS={{ swapcoins_merchant_id_coinpayments }}'
+  when: swapcoins_merchant_id_coinpayments is defined
