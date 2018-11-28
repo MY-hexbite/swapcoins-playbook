@@ -91,7 +91,7 @@
 # nginx
 - name: copy nginx configuration file
   template:
-    src: etc_nginx_sites-available_swapcoins.ca
+    src: etc_nginx_sites-available_swapcoins.com
     dest: '/etc/nginx/sites-available/{{ swapcoins_app_web_host }}'
   notify: reload nginx
 
@@ -104,7 +104,7 @@
 
 - name: copy api nginx configuration file
   template:
-    src: etc_nginx_sites-available_api.swapcoins.ca
+    src: etc_nginx_sites-available_api.swapcoins.com
     dest: '/etc/nginx/sites-available/{{ swapcoins_app_api_host }}'
   notify: reload nginx
 

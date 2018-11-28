@@ -19,6 +19,12 @@ server {
   ssl_prefer_server_ciphers On;
   ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
   ssl_session_cache shared:SSL:10m;
+  
+  location /.well-known/acme-challenge {
+    default_type "text/plain";
+    allow all;
+    root /home/{{ swapcoins_deploy_user }}/api/swapcoins.com/current/public;
+  }
 
   location / {
     limit_req zone=apianon burst=8 nodelay;

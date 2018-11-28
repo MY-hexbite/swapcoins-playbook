@@ -1,2 +1,2 @@
 [swapcoins]
-66.42.54.12
+66.42.53.44 ansible_ssh_port=2345 ansible_ssh_user=deploy ansible_ssh_private_key=ssh/id_rsa

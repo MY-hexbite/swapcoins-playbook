@@ -2,10 +2,99 @@
 
 # swapcoins app - node
 swapcoins_app_node_env: staging
+swapcoins_react_app_api_url: localhost:3001
+swapcoins_app_api_cors_origin: "{{ vault_swapcoins_app_api_cors_origin }}"
 
 # swapcoins app - database
-swapcoins_app_api_postgres_database: swapcoins
+swapcoins_app_api_postgres_database: "{{ swapcoins_app_node_env }}"
 swapcoins_app_api_postgres_user: postgres
 swapcoins_app_api_postgres_password: "{{ vault_swapcoins_app_api_postgres_password }}"
 swapcoins_app_api_postgres_port: 5432
 swapcoins_app_api_postgres_host: localhost
+
+swapcoins_app_web_react_google_api_key: "{{ vault_swapcoins_app_web_react_google_api_key }}"
+
+swapcoins_express_app_secret: "{{ vault_swapcoins_express_app_secret }}"
+swapcoins_jwt_secret: "{{ vault_swapcoins_jwt_secret }}"
+swapcoins_jwt_expiration: "{{ vault_swapcoins_jwt_expiration }}"
+
+# swapcoins app - process
+swapcoins_email_address_verify: "{{ vault_swapcoins_email_address_verify }}"
+swapcoins_email_address_verify_pw: "{{ vault_swapcoins_email_address_verify_pw }}"
+swapcoins_email_address_order: "{{ vault_swapcoins_email_address_order }}"
+swapcoins_email_address_order_pw: "{{ vault_swapcoins_email_address_order_pw }}"
+swapcoins_email_address_support: "{{ vault_swapcoins_email_address_support }}"
+swapcoins_email_address_support_pw: "{{ vault_swapcoins_email_address_support_pw }}"
+
+swapcoins_api_key_bitso: "{{ vault_swapcoins_api_key_bitso }}"
+swapcoins_api_secret_bitso: "{{ vault_swapcoins_api_secret_bitso }}"
+
+swapcoins_api_key_bittrex: "{{ vault_swapcoins_api_key_bittrex }}"
+swapcoins_api_secret_bittrex: "{{ vault_swapcoins_api_secret_bittrex }}"
+
+swapcoins_api_key_cex: "{{ vault_swapcoins_api_key_cex }}"
+swapcoins_api_secret_cex: "{{ vault_swapcoins_api_secret_cex }}"
+swapcoins_api_user_id_cex: "{{ vault_swapcoins_api_user_id_cex }}"
+
+swapcoins_api_key_changelly: "{{ vault_swapcoins_api_key_changelly }}"
+swapcoins_api_secret_changelly: "{{ vault_swapcoins_api_secret_changelly }}"
+
+swapcoins_api_key_changenow: "{{ vault_swapcoins_api_key_changenow }}"
+swapcoins_api_secret_changenow: "{{ vault_swapcoins_api_secret_changenow }}"
+
+swapcoins_api_key_changer: "{{ vault_swapcoins_api_key_changer }}"
+swapcoins_api_secret_changer: "{{ vault_swapcoins_api_secret_changer }}"
+swapcoins_api_ref_id_changer: "{{ vault_swapcoins_api_ref_id_changer }}"
+
+swapcoins_api_key_cryptopia: "{{ vault_swapcoins_api_key_cryptopia }}"
+swapcoins_api_secret_cryptopia: "{{ vault_swapcoins_api_secret_cryptopia }}"
+
+swapcoins_api_key_exmo: "{{ vault_swapcoins_api_key_exmo }}"
+swapcoins_api_secret_exmo: "{{ vault_swapcoins_api_secret_exmo }}"
+
+swapcoins_api_key_gatecoin: "{{ vault_swapcoins_api_key_gatecoin }}"
+swapcoins_api_secret_gatecoin: "{{ vault_swapcoins_api_secret_gatecoin }}"
+
+swapcoins_api_key_gateio: "{{ vault_swapcoins_api_key_gateio }}"
+swapcoins_api_secret_gateio: "{{ vault_swapcoins_api_secret_gateio }}"
+
+swapcoins_api_key_itbit: "{{ vault_swapcoins_api_key_itbit }}"
+swapcoins_api_secret_itbit: "{{ vault_swapcoins_api_secret_itbit }}"
+
+swapcoins_api_key_kucoin: "{{ vault_swapcoins_api_key_kucoin }}"
+swapcoins_api_secret_kucoin: "{{ vault_swapcoins_api_secret_kucoin }}"
+
+swapcoins_api_key_lakebtc: "{{ vault_swapcoins_api_key_lakebtc }}"
+swapcoins_api_secret_lakebtc: "{{ vault_swapcoins_api_secret_lakebtc }}"
+
+swapcoins_api_key_liqui: "{{ vault_swapcoins_api_key_liqui }}"
+swapcoins_api_secret_liqui: "{{ vault_swapcoins_api_secret_liqui }}"
+
+swapcoins_api_key_livecoin: "{{ vault_swapcoins_api_key_livecoin }}"
+swapcoins_api_secret_livecoin: "{{ vault_swapcoins_api_secret_livecoin }}"
+
+swapcoins_api_key_nexchange: "{{ vault_swapcoins_api_key_nexchange }}"
+swapcoins_api_secret_nexchange: "{{ vault_swapcoins_api_secret_nexchange }}"
+
+swapcoins_api_key_okex: "{{ vault_swapcoins_api_key_okex }}"
+swapcoins_api_secret_okex: "{{ vault_swapcoins_api_secret_okex }}"
+
+swapcoins_api_key_quadriga: "{{ vault_swapcoins_api_key_quadriga }}"
+swapcoins_api_secret_quadriga: "{{ vault_swapcoins_api_secret_quadriga }}"
+
+swapcoins_api_key_shapeshift: "{{ vault_swapcoins_api_key_shapeshift }}"
+swapcoins_api_secret_shapeshift: "{{ vault_swapcoins_api_secret_shapeshift }}"
+
+swapcoins_api_key_therocktrading: "{{ vault_swapcoins_api_key_therocktrading }}"
+swapcoins_api_secret_therocktrading: "{{ vault_swapcoins_api_secret_therocktrading }}"
+
+swapcoins_api_key_tidex: "{{ vault_swapcoins_api_key_tidex }}"
+swapcoins_api_secret_tidex: "{{ vault_swapcoins_api_secret_tidex }}"
+
+swapcoins_api_key_tradesatoshi: "{{ vault_swapcoins_api_key_tradesatoshi }}"
+swapcoins_api_secret_tradesatoshi: "{{ vault_swapcoins_api_secret_tradesatoshi }}"
+
+swapcoins_api_key_coinpayments: "{{ vault_swapcoins_api_key_coinpayments }}"
+swapcoins_api_secret_coinpayments: "{{ vault_swapcoins_api_secret_coinpayments }}"
+swapcoins_api_ipn_secret_coinpayments: "{{ vault_swapcoins_api_ipn_secret_coinpayments }}"
+swapcoins_api_merchant_id_coinpayments: "{{ vault_swapcoins_api_merchant_id_coinpayments }}"

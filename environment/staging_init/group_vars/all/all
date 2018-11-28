@@ -1,8 +1,8 @@
 ---
 
-environment_name: staging
+environment_name: staging_init
 
-ansible_ssh_port: 2345
+ansible_ssh_port: 22
 ansible_sudo_pass: "{{ vault_ansible_sudo_pass }}"
 
 # config - ssh

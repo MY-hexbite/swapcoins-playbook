@@ -58,11 +58,11 @@
     owner: '{{ swapcoins_deploy_user }}'
   when: cert_stats.stat.exists == True
 
-- name: generate certs (subsequent time)
-  become: yes
-  # become_user: '{{ swapcoins_deploy_user }}'
-  shell: "/home/{{ swapcoins_deploy_user }}/certbot-auto certonly --webroot -w /home/{{ swapcoins_deploy_user }}/www/swapcoins.com/current/public {{ letsencrypt_domain_flags | join(' ') }} --email {{ letsencrypt_email}} --non-interactive --agree-tos"
-  when: cert_stats.stat.exists == True
+#- name: generate certs (subsequent time)
+#  become: yes
+#  # become_user: '{{ swapcoins_deploy_user }}'
+#  shell: "/home/{{ swapcoins_deploy_user }}/certbot-auto certonly --webroot -w /home/{{ swapcoins_deploy_user }}/www/swapcoins.com/current/public {{ letsencrypt_domain_flags | join(' ') }} --email {{ letsencrypt_email}} --non-interactive --agree-tos"
+#  when: cert_stats.stat.exists == True
 
 - name: add cron job to autorenew certificates every week
   become: yes

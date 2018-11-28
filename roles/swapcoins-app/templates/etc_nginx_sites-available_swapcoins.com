@@ -14,11 +14,17 @@ server {
   server_name {{ swapcoins_app_web_nginx_server_name }};
 
   ssl on;
-  ssl_certificate     /etc/letsencrypt/live/swapcoins.ca/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/swapcoins.ca/privkey.pem;
+  ssl_certificate     /etc/letsencrypt/live/swapcoins.com/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/swapcoins.com/privkey.pem;
   ssl_prefer_server_ciphers On;
   ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
   ssl_session_cache shared:SSL:10m;
+
+  location /.well-known/acme-challenge {
+    default_type "text/plain";
+    allow all;
+    root /home/{{ swapcoins_deploy_user }}/www/swapcoins.com/current/public;
+  }
 
   location / {
     limit_req zone=webanon burst=5 nodelay;

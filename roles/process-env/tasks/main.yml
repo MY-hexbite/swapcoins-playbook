@@ -281,3 +281,18 @@
     regexp: '^API_MERCHANT_ID_COINPAYMENTS='
     line: 'API_MERCHANT_ID_COINPAYMENTS={{ swapcoins_merchant_id_coinpayments }}'
   when: swapcoins_merchant_id_coinpayments is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^EXPRESS_APP_SECRET='
+    line: 'EXPRESS_APP_SECRET={{ swapcoins_express_app_secret }}'
+  when: swapcoins_express_app_secret is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^JWT_SECRET='
+    line: 'JWT_SECRET={{ swapcoins_jwt_secret }}'
+  when: swapcoins_jwt_secret is defined
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^JWT_EXPIRATION='
+    line: 'JWT_EXPIRATION={{ swapcoins_jwt_expiration }}'
+  when: swapcoins_jwt_expiration is defined

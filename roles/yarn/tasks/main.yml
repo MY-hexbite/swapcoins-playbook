@@ -1,0 +1,8 @@
+---
+
+- name: install yarn
+  become: yes
+  apt:
+    name: yarn
+    state: present
+

@@ -8,6 +8,8 @@
     update_cache: yes
   with_items:
     - apt-transport-https
+    - python2.7
+    - python2.7-minimal
 
 - name: install apt system packages
   become: yes
@@ -34,3 +36,14 @@
   with_items:
     - software-properties-common
     - python-software-properties
+    - python-setuptools
+    - build-essential
+    - libssl-dev
+    - libffi-dev
+    - python-dev
+    - python-pip
+    - python-virtualenv
+    - dialog
+    - libaugeas0
+    - ca-certificates
+

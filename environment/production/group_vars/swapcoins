@@ -2,13 +2,21 @@
 
 # swapcoins app - node
 swapcoins_app_node_env: production
+swapcoins_react_app_api_url: localhost:3001
+swapcoins_app_api_cors_origin: "{{ vault_swapcoins_app_api_cors_origin }}"
 
 # swapcoins app - database
-swapcoins_app_api_postgres_database: swapcoins
+swapcoins_app_api_postgres_database: "{{ swapcoins_app_node_env }}"
 swapcoins_app_api_postgres_user: postgres
 swapcoins_app_api_postgres_password: "{{ vault_swapcoins_app_api_postgres_password }}"
 swapcoins_app_api_postgres_port: 5432
 swapcoins_app_api_postgres_host: localhost
+
+swapcoins_app_web_react_google_api_key: "{{ vault_swapcoins_app_web_react_google_api_key }}"
+
+swapcoins_express_app_secret: "{{ vault_swapcoins_express_app_secret }}"
+swapcoins_jwt_secret: "{{ vault_swapcoins_jwt_secret }}"
+swapcoins_jwt_expiration: "{{ vault_swapcoins_jwt_expiration }}"
 
 # swapcoins app - process
 swapcoins_email_address_verify: "{{ vault_swapcoins_email_address_verify }}"

@@ -29,8 +29,8 @@
 
 - name: grant deploy user root privileges
   become: yes
-  lininfile:
+  lineinfile:
     dest: /etc/sudoers
     regexp: '^deploy'
-    line: 'deploy ALL={ALL:ALL) ALL'
+    line: 'deploy ALL=(ALL:ALL) ALL'
     state: present

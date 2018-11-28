@@ -13,10 +13,16 @@ vagrant up
 ansible-playbook build.yml
 
 # Provision server (first time only). On boot, linode installs on port 22; reassign to whatever is in production_init
-ansible-playbook provisioning/provision.yml -i "<ip address>.ca:22," -u root --ask-pass --ask-vault-pass --extra-vars "environment_name=production_init"
+# Production:
+ansible-playbook provisioning/provision.yml -i "45.32.102.215:22," -u root --ask-pass --ask-vault-pass --extra-vars "environment_name=production_init"
+# Staging:
+ansible-playbook provisioning/provisioning.yml -i "66.42.53.44:22," -u root --ask-pass --ask-vault-pass --extra-vars "environment_name=staging_init"
 
 # Deploy
+# Production:
 ansible-playbook -i environment/production swapcoins.yml --ask-vault-pass
+# Staging:
+ansible-playbook -i environment/staging swapcoins.yml --ask-vault-pass
 
 # Init user on remote
 sudo node -e 'require("./scripts/make-user.js").init()'

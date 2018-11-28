@@ -2,6 +2,7 @@
 
 - hosts: swapcoins
   become: yes
+  gather_facts: false
   roles:
     - common
     - { role: swapcoins-app, tags: swapcoins-app }

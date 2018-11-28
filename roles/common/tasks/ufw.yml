@@ -16,6 +16,7 @@
     - '{{ ssh_port }}'
     - '80'
     - '443'
+    - '465'
 
 - name: ufw enable
   ufw:
