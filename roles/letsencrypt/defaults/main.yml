@@ -4,6 +4,8 @@ swapcoins_deploy_user: deploy
 
 letsencrypt_email: 'support@swapcoins.com'
 letsencrypt_domain_flags:
-  - '-d swapcoins.com'
-  - '-d www.swapcoins.com'
-  - '-d api.swapcoins.com'
+  #- '-d swapcoins.com'
+  #- '-d www.swapcoins.com'
+  #- '-d api.swapcoins.com'
+  - '-d staging.api.swapcoins.com'
+  - '-d staging.swapcoins.com'

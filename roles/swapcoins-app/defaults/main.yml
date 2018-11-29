@@ -1,8 +1,12 @@
 ---
 
 swapcoins_app_user: swapcoins
-swapcoins_app_web_host: swapcoins.com
-swapcoins_app_api_host: api.swapcoins.com
+## production:
+#swapcoins_app_web_host: swapcoins.com
+#swapcoins_app_api_host: api.swapcoins.com
+## staging:
+swapcoins_app_web_host: staging.swapcoins.com
+swapcoins_app_api_host: staging.api.swapcoins.com
 
 # swapcoins app - install
 swapcoins_app_install_dir: /srv/swapcoins-app
@@ -15,9 +19,17 @@ swapcoins_app_api_postgres_password: '{{ vault_swapcoins_app_api_postgres_passwo
 # environment
 swapcoins_app_api_port: 3001
 swapcoins_app_web_port: 3000
-swapcoins_app_api_root_url: https://api.swapcoins.com
-swapcoins_app_web_root_url: https://swapcoins.com
+## production:
+#swapcoins_app_api_root_url: https://api.swapcoins.com
+#swapcoins_app_web_root_url: https://swapcoins.com
+## staging:
+swapcoins_app_api_root_url: https://staging.api.swapcoins.com
+swapcoins_app_web_root_url: https://staging.swapcoins.com
 
 # nginx
-swapcoins_app_api_nginx_server_name: api.swapcoins.com
-swapcoins_app_web_nginx_server_name: swapcoins.com
+## production:
+#swapcoins_app_api_nginx_server_name: api.swapcoins.com
+#swapcoins_app_web_nginx_server_name: swapcoins.com
+## staging:
+swapcoins_app_api_nginx_server_name: staging.api.swapcoins.com
+swapcoins_app_web_nginx_server_name: staging.swapcoins.com

@@ -1,3 +1,4 @@
 ---
 
 nodejs_version: 8
+ansible_distribution_release: "xenial" #trusty
