@@ -4,18 +4,18 @@ limit_req_zone $binary_remote_addr zone=webanon:10m rate=10r/s;
 server {
     listen 80;
 
-    server_name {{ swapcoins_app_web_nginx_server_name }};
-    return 301 https://{{ swapcoins_app_web_nginx_server_name }}$request_uri;
+    server_name staging.swapcoins.com;
+    return 301 https://staging.swapcoins.com$request_uri;
 }
 
 server {
   listen 443;
 
-  server_name {{ swapcoins_app_web_nginx_server_name }};
+  server_name staging.swapcoins.com;
 
   ssl on;
-  ssl_certificate     /etc/letsencrypt/live/swapcoins.com/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/swapcoins.com/privkey.pem;
+  ssl_certificate     /etc/letsencrypt/live/staging.swapcoins.com/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/staging.swapcoins.com/privkey.pem;
   ssl_prefer_server_ciphers On;
   ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
   ssl_session_cache shared:SSL:10m;
@@ -23,7 +23,7 @@ server {
   location /.well-known/acme-challenge {
     default_type "text/plain";
     allow all;
-    root /home/{{ swapcoins_deploy_user }}/www/swapcoins.com/current/public;
+    root /home/deploy/www/staging.swapcoins.com/current/public;
   }
 
   location / {

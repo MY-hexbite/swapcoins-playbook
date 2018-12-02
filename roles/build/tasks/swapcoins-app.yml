@@ -1,0 +1,81 @@
+---
+
+# local git update
+- name: update local git repo
+  become: false
+  local_action: shell cd source/swapcoins-app; git fetch {{ swapcoins_app_build_git_remote }}; git checkout {{ swapcoins_app_build_git_branch }}; git pull {{ swapcoins_app_build_git_remote }} {{ swapcoins_app_build_git_branch }}
+
+# local checkout to source directory
+- name: checkout swapcoins app
+  become: yes
+  become_user: '{{ build_user }}'
+  git:
+    repo: file:////vagrant/source/swapcoins-app
+    dest: '{{ source_dir }}/swapcoins-app'
+    remote: '{{ swapcoins_app_build_git_remote }}'
+    version: '{{ swapcoins_app_build_git_branch }}'
+    force: true
+
+# clean build directory
+- name: clean build output dir
+  become: yes
+  become_user: '{{ build_user }}'
+  file:
+    name: '{{ build_dir }}/swapcoins-app'
+    state: absent
+
+# recreate build directory
+- name: create build output dir
+  file:
+    path: '{{ item }}'
+    state: directory
+    owner: '{{ build_user }}'
+    group: '{{ build_user }}'
+  with_items:
+    - '{{ build_dir }}/swapcoins-app'
+    - '{{ build_dir }}/swapcoins-app/api'
+    - '{{ build_dir }}/swapcoins-app/web'
+
+- name: copy swapcoins api app build output dir
+  become_user: '{{ build_user }}'
+  shell: cp -r {{ source_dir }}/swapcoins-app/api/* {{ build_dir }}/swapcoins-app/api
+
+- name: copy swapcoins web app build output dir
+  become_user: '{{ build_user }}'
+  shell: cp -r {{ source_dir }}/swapcoins-app/web/* {{ build_dir }}/swapcoins-app/web
+
+- name: add git hash to build output dir
+  shell: git rev-parse HEAD > {{ build_dir }}/swapcoins-app/git-hash
+  args:
+    chdir: '{{ source_dir }}/swapcoins-app'
+
+- name: clean build output dir host
+  become_user: '{{ build_user }}'
+  file:
+    name: '{{ host_build_dir }}/swapcoins-app'
+    state: absent
+
+  # execute
+- name: create build output dir host
+  become_user: '{{ build_user }}'
+  file:
+    path: '{{ item }}'
+    state: directory
+    owner: '{{ build_user }}'
+    group: vagrant
+  with_items:
+    - '{{ host_build_dir }}/swapcoins-app'
+    - '{{ host_build_dir }}/swapcoins-app/api'
+    - '{{ host_build_dir }}/swapcoins-app/web'
+
+- name: copy api to build dir
+  become_user: '{{ build_user }}'
+  shell: cp -r {{ build_dir }}/swapcoins-app/api/* {{ host_build_dir }}/swapcoins-app/api
+
+- name: copy web to build dir
+  become_user: '{{ build_user }}'
+  shell: cp -r {{ build_dir }}/swapcoins-app/web/* {{ host_build_dir }}/swapcoins-app/web
+
+- name: copy git hash to build dir
+  become_user: '{{ build_user }}'
+  shell: cp -r {{ build_dir }}/swapcoins-app/git-hash {{ host_build_dir }}/swapcoins-app/git-hash

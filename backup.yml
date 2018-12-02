@@ -1,0 +1,42 @@
+---
+- hosts: swapcoins
+  vars:
+    backups_identifier: swapcoins/database
+    local_backups_directory: backups/{{ environment_name }}/{{ backups_identifier }}
+    remote_backup_directory: backups/{{ backups_identifier }}
+    local_backups_count: 5
+    remote_backups_count: 10
+    swapcoins_app_api_postgres_user: postgres
+    swapcoins_app_api_postgres_database: production
+
+  tasks:
+    - name: set backup timestamp
+      command: date +%Y%m%d%H%M%S
+      register: timestamp
+
+    - name: create local backup folder
+      local_action: command mkdir -p {{ local_backups_directory }}
+
+    - name: delete old local backups (keep last n)
+      local_action: shell cd {{ local_backups_directory }}; (ls -t|head -n {{ local_backups_count }};ls)|sort|uniq -u|xargs rm -rf
+
+    - name: create remote backup directory
+      file: path=/home/{{ ansible_ssh_user }}/{{ item }} state=directory owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }}
+      with_items:
+        - "{{ remote_backup_directory }}"
+
+    - name: delete old remote backups (keep last n)
+      shell: (ls -t|head -n {{ local_backups_count }};ls)|sort|uniq -u|xargs rm -rf chdir=/home/{{ ansible_ssh_user }}/{{ remote_backup_directory }}/
+
+    - name: backup postgres database
+      become: true
+      shell: sudo -u {{ swapcoins_app_api_postgres_user }} pg_dump -d {{ swapcoins_app_api_postgres_database }} | gzip > /home/{{ ansible_ssh_user }}/{{ remote_backup_directory }}/{{ timestamp.stdout }}-swapcoins.gz
+
+    - name: download postgres database
+      fetch: src=/home/{{ ansible_ssh_user }}/{{ remote_backup_directory }}/{{ timestamp.stdout }}-swapcoins.gz dest={{ local_backups_directory }}/ flat=yes
+
+    - name: link latest backup (remote)
+      file: src=/home/{{ ansible_ssh_user }}/{{ remote_backup_directory }}/{{ timestamp.stdout }}-swapcoins.gz dest=/home/{{ ansible_ssh_user }}/{{ remote_backup_directory }}/latest-swapcoins.gz state=link force=yes
+
+    - name: link latest backup (local)
+      local_action: shell ln -sf {{ local_backups_directory }}/{{ timestamp.stdout }}-swapcoins.gz {{ local_backups_directory }}/latest-swapcoins.gz

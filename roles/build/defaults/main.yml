@@ -1,0 +1,16 @@
+---
+
+# build - user config
+build_user: vagrant
+build_user_password: vagrant
+build_user_crypted_password: $6$rounds=656000$qsyZgszM0rRUEVzj$6QciLm736aIUUKpvFyfqZ7NhzW..NQKHjOrsWrEfZopfpn3TgmMGmktTG554oFb53XysC3tiXkGCBwL4Un8I/.
+
+
+# build - directory config
+host_source_dir: /vagrant/source
+host_build_dir: /vagrant/build
+source_dir: /var/swapcoins/source
+build_dir: /var/swapcoins/build
+
+# build - git config
+swapcoins_app_build_git_branch: master

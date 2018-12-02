@@ -1,0 +1,4 @@
+---
+
+- include: setup.yml tags=swapcoins-app
+- include: swapcoins-app.yml tags=swapcoins-app

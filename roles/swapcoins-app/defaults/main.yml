@@ -8,6 +8,9 @@ swapcoins_app_user: swapcoins
 swapcoins_app_web_host: staging.swapcoins.com
 swapcoins_app_api_host: staging.api.swapcoins.com
 
+# local build folder
+swapcoins_app_local_build_dir: build/swapcoins-app
+
 # swapcoins app - install
 swapcoins_app_install_dir: /srv/swapcoins-app
 

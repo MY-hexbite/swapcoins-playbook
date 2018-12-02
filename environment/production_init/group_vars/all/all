@@ -1,6 +1,6 @@
 ---
 
-environment_name: production
+environment_name: production_init
 
 ansible_ssh_port: 22
 ansible_sudo_pass: "{{ vault_ansible_sudo_pass }}"
@@ -8,6 +8,5 @@ ansible_sudo_pass: "{{ vault_ansible_sudo_pass }}"
 # config - ssh
 ssh_port: 2345
 
-# root_user_crypted_password: $6$rounds=656000$Q7oIAFBpOe7s5jBE$llzEukSIoneGwkJTdyId8RRV0gc9pKqpaZIsFFhrH8Cm3R.HEKABXmUthct7gmfWvY4AhzKdw/jCyFUMbLSVY.
-root_user_crypted_password: $6$rounds=656000$ncO502qZ/wyIzizW$.OSujfeGqpfxZksgJr/DltN0HpCj/9nXLgh3X1irz3fZboR1h3Ycmgob52eE7iZAYUHY4kegzoldCZYzPlnJz.
-deploy_user_crypted_password: $6$rounds=656000$811yKOLN0sckLCdA$x/jkL6exsdOLN1THg58.AuayeVOw3GTZ9iFdF.NVmAOK1EqERpRl76DeSGxUNmBmKSPABuEhy4ETQekQfeX7h1
+root_user_crypted_password: $6$rounds=656000$8IMhgOrC0cxeKBWg$BHq2QM3Mi3VCVumr8NR8mBOPj.hJ/cVXbllrsY4sSDX6d9cLj9hnIFkoVetuNUstp1esVp9r3Z9mewYnIz2/r1
+deploy_user_crypted_password: $6$rounds=656000$U.NPI0RJjvoPI66Q$L5m/xHX1LqW/Un7BKVXdM649oAvO7ZlvLhJ6ZxRif3QgItOGJa6rLjDSpAacVyY4g.fPWmHnReU5NY1oNONH7/

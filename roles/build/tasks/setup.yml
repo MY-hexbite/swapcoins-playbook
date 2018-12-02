@@ -1,0 +1,22 @@
+---
+
+- name: install git
+  become: yes
+  apt:
+    pkg:
+      - git
+      - build-essential
+      - g++
+      - libpq-dev
+    state: latest
+    update-cache: yes
+
+- name: create source and build directories
+  file:
+    path: '{{ item }}'
+    state: directory
+    owner: '{{ build_user }}'
+    group: '{{ build_user }}'
+  with_items:
+    - '{{ source_dir }}'
+    - '{{ build_dir }}'
