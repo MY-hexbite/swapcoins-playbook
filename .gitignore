@@ -1,1 +1,5 @@
 source/
+*.vagrant/
+*.retry
+*.bak
+*.log
